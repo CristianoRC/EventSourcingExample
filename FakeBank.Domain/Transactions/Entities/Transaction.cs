@@ -13,8 +13,10 @@ namespace FakeBank.Domain.Transactions.Entities
             Account = accountId;
             Type = type;
             Amount = amount;
+            TransactionId = Guid.NewGuid();
         }
 
+        public Guid TransactionId { get; }
         public Guid Account { get; }
         public ETransactionType Type { get; }
         public decimal Amount { get; }

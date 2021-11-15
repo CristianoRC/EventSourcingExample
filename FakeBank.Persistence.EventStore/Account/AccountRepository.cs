@@ -25,7 +25,7 @@ namespace FakeBank.Persistence.EventStore.Account
         {
             var key = generateCacheKey(account.Id);
             var accountJson = JsonSerializer.Serialize(account);
-            await _cache.SetAsync(key, new UTF8Encoding().GetBytes(accountJson));
+            await _cache.SetAsync(key, Encoding.UTF8.GetBytes(accountJson));
         }
 
         public async Task<bool> AccountExists(Guid accountId)

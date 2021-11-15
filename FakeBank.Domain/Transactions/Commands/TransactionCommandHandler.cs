@@ -21,7 +21,7 @@ namespace FakeBank.Domain.Transactions.Commands
             _accountRepository = accountRepository;
         }
 
-        public async Task AddTransaction(CreateTransactionCommand command)
+        public async Task<Transaction> AddTransaction(CreateTransactionCommand command)
         {
             var accountExists = await _accountRepository.AccountExists(command.AccountId);
             if (!accountExists)
@@ -34,7 +34,7 @@ namespace FakeBank.Domain.Transactions.Commands
 
             var transaction = new Transaction(command.AccountId, command.TransactionType, command.Amount);
 
-            await _repository.AddNewTransaction(transaction);
+            return await _repository.AddNewTransaction(transaction);
         }
     }
 }

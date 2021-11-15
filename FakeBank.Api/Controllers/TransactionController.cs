@@ -24,8 +24,8 @@ namespace FakeBank.Api.Controllers
         {
             try
             {
-                await _handler.AddTransaction(command);
-                return NoContent();
+                var transaction = await _handler.AddTransaction(command);
+                return Created("", transaction);
             }
             catch (ArgumentException e)
             {
