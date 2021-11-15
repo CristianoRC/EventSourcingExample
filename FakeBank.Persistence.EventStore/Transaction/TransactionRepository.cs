@@ -34,7 +34,8 @@ namespace FakeBank.Persistence.EventStore.Transaction
             return EventStoreConnection.Create(settings, connectionString);
         }
 
-        public async Task<Domain.Transactions.Entities.Transaction> AddNewTransaction(Domain.Transactions.Entities.Transaction transaction)
+        public async Task<Domain.Transactions.Entities.Transaction> AddNewTransaction(
+            Domain.Transactions.Entities.Transaction transaction)
         {
             var transactionJson = JsonSerializer.Serialize(transaction);
 
@@ -46,10 +47,9 @@ namespace FakeBank.Persistence.EventStore.Transaction
                 data: Encoding.UTF8.GetBytes(transactionJson),
                 metadata: Encoding.UTF8.GetBytes("{}")
             );
-            var connection = CreateConnection();
+            using var connection = CreateConnection();
             await connection.ConnectAsync();
             await connection.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventData);
-
             return transaction;
         }
     }

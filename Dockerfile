@@ -3,18 +3,17 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /src
-COPY ["FakeBank.csproj", "./"]
-RUN dotnet restore "FakeBank.csproj"
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src/
 COPY . .
-WORKDIR "/src/"
-RUN dotnet build "FakeBank.csproj" -c Release -o /app/build
+RUN ls FakeBank.Api
+RUN dotnet build FakeBank.Api/FakeBank.Api.csproj
 
 FROM build AS publish
-RUN dotnet publish "FakeBank.csproj" -c Release -o /app/publish
+RUN dotnet publish "FakeBank.Api/FakeBank.Api.csproj" -c Release -o /app/publish
+
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "FakeBank.dll"]
+ENTRYPOINT ["dotnet", "FakeBank.Api.dll"]

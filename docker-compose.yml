@@ -1,7 +1,16 @@
 version: "3.4"
 
 services:
-  eventstore.db:
+  # api:
+  #   build: .
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   depends_on:
+  #     - eventstore_db
+  #     - redis
+
+  eventstore_db:
     image: eventstore/eventstore:20.10.2-buster-slim
     environment:
       - EVENTSTORE_CLUSTER_SIZE=1
@@ -15,3 +24,7 @@ services:
     ports:
       - "1113:1113"
       - "2113:2113"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
