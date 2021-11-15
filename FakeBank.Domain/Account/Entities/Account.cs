@@ -1,4 +1,5 @@
 using System;
+using FakeBank.Domain.Account.ValueObjects;
 
 namespace FakeBank.Domain.Account.Entities
 {
@@ -8,11 +9,11 @@ namespace FakeBank.Domain.Account.Entities
         {
             Id = Guid.NewGuid();
             Client = client;
-            Password = password;
+            Password = new Password(password);
         }
 
         public Guid Id { get; }
         public Client Client { get; }
-        public string Password { get; }
+        public Password Password { get; }
     }
 }
