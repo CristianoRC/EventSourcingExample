@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace FakeBank.Domain.ValueObjects
+namespace FakeBank.Domain.Account.ValueObjects
 {
     public class Email
     {

@@ -1,4 +1,4 @@
-namespace FakeBank.Domain.ValueObjects
+namespace FakeBank.Domain.Account.ValueObjects
 {
     public class Address
     {
