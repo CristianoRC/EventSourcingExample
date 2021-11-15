@@ -3,11 +3,19 @@ using System.Threading.Tasks;
 
 namespace FakeBank.Domain.Account.Services.Password
 {
-    public  class PasswordServices : IPasswordServices
+    public class PasswordServices : IPasswordServices
     {
-        public Task<bool> PasswordIsValid(Guid accountId, string password)
+        public async Task<bool> PasswordIsValid(Guid accountId, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                new ValueObjects.Password(password);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

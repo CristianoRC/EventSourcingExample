@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -15,16 +16,23 @@ namespace FakeBank.Persistence.EventStore.Account
             _cache = cache;
         }
 
-        private string generateCacheKey(Domain.Account.Entities.Account account)
+        private string generateCacheKey(Guid accountId)
         {
-            return $"account-{account.Id.ToString()}";
+            return $"account-{accountId.ToString()}";
         }
 
         public async Task CreateAccount(Domain.Account.Entities.Account account)
         {
-            var key = generateCacheKey(account);
+            var key = generateCacheKey(account.Id);
             var accountJson = JsonSerializer.Serialize(account);
             await _cache.SetAsync(key, new UTF8Encoding().GetBytes(accountJson));
+        }
+
+        public async Task<bool> AccountExists(Guid accountId)
+        {
+            var key = generateCacheKey(accountId);
+            var account = await _cache.GetAsync(key);
+            return account is not null;
         }
     }
 }
