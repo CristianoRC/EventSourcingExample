@@ -28,6 +28,10 @@ namespace FakeBank.Api.Controllers
                 await _accountService.CreateAccount(accountCommand);
                 return NoContent();
             }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
             catch (Exception e)
             {
                 //TODO: Implementar outras validações de erros
