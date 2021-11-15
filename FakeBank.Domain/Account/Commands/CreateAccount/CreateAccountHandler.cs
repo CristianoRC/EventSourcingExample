@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using FakeBank.Domain.Account.Entities;
 using FakeBank.Domain.Account.Repository;
@@ -14,7 +15,7 @@ namespace FakeBank.Domain.Account.Commands.CreateAccount
             _repository = repository;
         }
 
-        public async Task CreateAccount(CreateAccountCommand command)
+        public async Task<Guid> CreateAccount(CreateAccountCommand command)
         {
             var name = new Name(command.FirstName, command.LastName);
             var address = new Address(command.Street, command.City, command.ZipCode);
@@ -23,7 +24,7 @@ namespace FakeBank.Domain.Account.Commands.CreateAccount
             var client = new Client(name, address, email);
 
             var account = new Entities.Account(client, command.Password);
-            await _repository.CreateAccount(account);
+            return await _repository.CreateAccount(account);
         }
     }
 }

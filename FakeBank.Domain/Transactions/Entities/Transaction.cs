@@ -5,6 +5,10 @@ namespace FakeBank.Domain.Transactions.Entities
 {
     public class Transaction
     {
+        public Transaction()
+        {
+        }
+
         public Transaction(Guid accountId, ETransactionType type, decimal amount)
         {
             if (amount < 0)
@@ -16,9 +20,9 @@ namespace FakeBank.Domain.Transactions.Entities
             TransactionId = Guid.NewGuid();
         }
 
-        public Guid TransactionId { get; }
-        public Guid Account { get; }
-        public ETransactionType Type { get; }
-        public decimal Amount { get; }
+        public Guid TransactionId { get; set; }
+        public Guid Account { get; set; }
+        public ETransactionType Type { get; set; }
+        public decimal Amount { get; set; }
     }
 }
