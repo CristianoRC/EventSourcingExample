@@ -63,7 +63,7 @@ namespace FakeBank.Persistence.EventStore.Transaction
             await connection.ConnectAsync();
             await connection.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventData);
 
-            await UpdateAmount(transaction.TransactionId, transaction.Amount, transaction.Type);
+            await UpdateAmount(transaction.Account, transaction.Amount, transaction.Type);
 
             return transaction;
         }
