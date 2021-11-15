@@ -53,11 +53,11 @@ namespace FakeBank.Persistence.EventStore.Transaction
         {
             var transactionJson = JsonSerializer.Serialize(transaction);
             var eventData = new EventData(
-                eventId: Guid.NewGuid(),
-                type: Enum.GetName(transaction.Type),
-                isJson: true,
-                data: Encoding.UTF8.GetBytes(transactionJson),
-                metadata: Encoding.UTF8.GetBytes("{}")
+                Guid.NewGuid(),
+                Enum.GetName(transaction.Type),
+                true,
+                Encoding.UTF8.GetBytes(transactionJson),
+                Encoding.UTF8.GetBytes("{}")
             );
             using var connection = CreateConnection();
             await connection.ConnectAsync();
