@@ -48,8 +48,7 @@ namespace FakeBank.Persistence.EventStore.Transaction
             return EventStoreConnection.Create(settings, connectionString);
         }
 
-        public async Task<Domain.Transactions.Entities.Transaction> AddNewTransaction(
-            Domain.Transactions.Entities.Transaction transaction)
+        public async Task<Domain.Transactions.Entities.Transaction> AddNewTransaction(Domain.Transactions.Entities.Transaction transaction)
         {
             var transactionJson = JsonSerializer.Serialize(transaction);
             var eventData = new EventData(
