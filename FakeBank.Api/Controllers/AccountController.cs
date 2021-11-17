@@ -5,6 +5,7 @@ using FakeBank.Domain.Account.Commands;
 using FakeBank.Domain.Account.Commands.CreateAccount;
 using FakeBank.Domain.Account.Queries;
 using FakeBank.Domain.Account.Repository;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -43,7 +44,7 @@ namespace FakeBank.Api.Controllers
             {
                 //TODO: Implementar outras validações de erros
                 _logger.LogError("Ocorreu um erro inesperado", e);
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status507InsufficientStorage);
             }
         }
 
@@ -63,7 +64,7 @@ namespace FakeBank.Api.Controllers
             {
                 //TODO: Implementar outras validações de erros
                 _logger.LogError("Ocorreu um erro inesperado", e);
-                return StatusCode(500);
+                return StatusCode(StatusCodes.Status507InsufficientStorage);
             }
         }
     }
